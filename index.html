@@ -193,6 +193,41 @@
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); }
         .modal-content { margin: auto; display: block; max-width: 90%; max-height: 90vh; margin-top: 5vh; border-radius: 8px; }
         .close-modal { position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; cursor: pointer; }
+
+/* --- ADAPTATION POUR LES TÉLÉPHONES (RESPONSIVE) --- */
+        @media (max-width: 768px) {
+            /* Réduction des textes de l'en-tête */
+            header { padding: 100px 15px 30px; }
+            header h1 { font-size: 2.2rem; }
+            .subtitle { font-size: 1rem; line-height: 1.5; }
+            
+            /* Le bloc principal prend tout l'écran */
+            .container { margin: 15px; padding: 20px; }
+            .section h2 { font-size: 1.3rem; }
+            
+            /* Adaptation de la barre de navigation (Menu mobile) */
+            nav { padding: 15px; align-items: flex-start; flex-direction: column; }
+            
+            /* Bouton CV et Mode Sombre déplacés en haut à droite */
+            nav > div:last-child { position: absolute; top: 12px; right: 15px; gap: 10px; }
+            nav .btn { font-size: 0.75rem; padding: 8px 10px; }
+            
+            /* Le menu déroulant prend toute la largeur */
+            .nav-left { width: 100%; }
+            .nav-links { width: 100%; flex-direction: column; gap: 5px; margin-top: 15px; }
+            .nav-links a { text-align: left; padding: 12px; background-color: var(--bg-color); border-radius: 6px; }
+            
+            /* Les certifications s'affichent sur 1 seule colonne */
+            .cert-grid { grid-template-columns: 1fr; }
+            
+            /* Les boutons de contact s'empilent proprement */
+            .contact-info { flex-direction: column; }
+            .contact-info span { justify-content: center; }
+            
+            /* Adaptation de la taille de l'image du diplôme */
+            .modal-content { max-width: 95%; margin-top: 15vh; }
+        }
+
     </style>
 </head>
 <body>
