@@ -57,7 +57,7 @@
 
         h1, h2, h3, h4 { color: var(--heading-color); font-weight: 600; }
 
-        /* Barre de Navigation (Nouveau) */
+        /* Barre de Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -75,54 +75,32 @@
 
         .nav-brand { font-weight: 700; font-size: 1.2rem; color: var(--accent-color); }
         
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: var(--transition); }
         .nav-links a:hover { color: var(--accent-color); }
 
         .theme-toggle {
-            background: none;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: var(--transition);
+            background: none; border: 1px solid var(--border-color); color: var(--text-color);
+            padding: 6px 12px; border-radius: 20px; cursor: pointer; transition: var(--transition);
         }
 
         /* En-tête (Header) */
         header {
-            margin-top: 70px;
-            background-color: var(--container-bg);
-            padding: 80px 20px 50px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
+            margin-top: 70px; background-color: var(--container-bg);
+            padding: 80px 20px 50px; text-align: center; border-bottom: 1px solid var(--border-color);
         }
 
         header h1 { font-size: 2.8rem; color: var(--accent-color); margin-bottom: 10px; }
         .subtitle { font-size: 1.15rem; font-weight: 500; color: var(--text-color); margin-bottom: 20px; }
         
-        .contact-info {
-            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 25px;
-        }
+        .contact-info { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 25px; }
         .contact-info a { color: var(--accent-color); text-decoration: none; }
         .contact-info a:hover { text-decoration: underline; }
 
-        /* Boutons */
         .btn {
             display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
             background-color: var(--accent-color); color: #ffffff !important;
-            text-decoration: none; border-radius: 8px; font-weight: 600;
-            transition: var(--transition);
+            text-decoration: none; border-radius: 8px; font-weight: 600; transition: var(--transition);
         }
         .btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
 
@@ -136,7 +114,7 @@
         .section { margin-bottom: 50px; padding-top: 60px; margin-top: -60px; }
         .section h2 { border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 25px; color: var(--accent-color); }
 
-        /* Cartes */
+        /* Cartes (Expériences / Projets) */
         .card {
             border: 1px solid var(--border-color); padding: 25px; border-radius: 8px;
             margin-bottom: 20px; background-color: var(--bg-color); transition: var(--transition);
@@ -145,34 +123,52 @@
         .card h3 { margin-top: 0; margin-bottom: 5px; }
         .card .meta { font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px; display: flex; justify-content: space-between; }
         
-        /* Grille des certifications */
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-        }
+        /* Grille des certifications avec effet Hover */
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        
         .cert-card {
             border: 1px solid var(--border-color); padding: 20px; border-radius: 8px;
-            background-color: var(--bg-color); display: flex; align-items: flex-start; gap: 15px;
+            background-color: var(--bg-color); display: flex; align-items: center; gap: 15px;
             transition: var(--transition);
+            position: relative; /* Essentiel pour l'image au-dessus */
+            overflow: hidden; /* Garde l'image dans les bords ronds */
+            min-height: 100px;
         }
+        
         .cert-card:hover { transform: translateY(-3px); box-shadow: var(--hover-shadow); border-color: var(--accent-color); }
         .cert-icon { font-size: 2rem; color: var(--accent-color); }
         .cert-info h4 { margin: 0 0 5px 0; font-size: 1rem; }
         .cert-info p { margin: 0; font-size: 0.85rem; opacity: 0.8; }
 
+        /* Style de l'image cachée */
+        .cert-image {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: contain; /* Ajuste l'image sans la couper */
+            background-color: var(--container-bg);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease; /* Animation d'apparition douce */
+            z-index: 10;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        /* L'image apparaît quand on passe la souris sur la carte */
+        .cert-card:hover .cert-image {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
         .tags span { background-color: var(--tag-bg); color: var(--tag-text); padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 500; }
-
         ul { padding-left: 20px; }
         li { margin-bottom: 8px; }
     </style>
 </head>
 <body>
 
-<!-- Menu de Navigation Fixe -->
 <nav>
-    <div class="nav-brand">K. TARHDA</div>
     <div class="nav-links">
         <a href="#about">À propos</a>
         <a href="#experience">Expérience</a>
@@ -185,26 +181,21 @@
 
 <header id="accueil">
     <h1>Khalil TARHDA</h1>
-    <p class="subtitle">Ingénieur R&D | Data Science, IA & Perception 3D & Computer Vision</p>
-    
+    <p class="subtitle">Ingénieur R&D | Data Science, IA, Perception 3D & Computer Vision</p>
     <div class="contact-info">
         <span><i class="fas fa-map-marker-alt"></i> Mobile en France</span>
         <span><i class="fas fa-envelope"></i> <a href="mailto:ktarhda@gmail.com">ktarhda@gmail.com</a></span>
         <span><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/khalil-tarhda-854825243/" target="_blank">LinkedIn</a></span>
     </div>
-
     <a href="cv.pdf" class="btn" download><i class="fas fa-download"></i> Télécharger mon CV</a>
 </header>
 
 <div class="container">
-    
-    <!-- Section À Propos -->
     <div id="about" class="section">
         <h2><i class="fas fa-user"></i> À propos de moi</h2>
         <p>Passionné par l'informatique, la technologie et l'intelligence artificielle, je suis diplômé en Sciences Mathématiques et Informatique de l'Université Mohammed V de Rabat. Actuellement, je poursuis un Master M2 en Ingénierie des Systèmes Complexes à l'École d'Ingénieurs du Littoral Côte d'Opale en France. Mon parcours m'a permis de développer une forte capacité à gérer le stresse, à communiquer efficacement et à résoudre des problèmes complexes. J'ai également acquis une vision stratégique, un sens aigu de l'organisation, et je sais m'intégrer et collaborer au sein d'une équipe. Trilingue en arabe, français et anglais, je suis prêt à contribuer à des projets innovants.</p>
     </div>
 
-    <!-- Section Expérience -->
     <div id="experience" class="section">
         <h2><i class="fas fa-briefcase"></i> Expérience Professionnelle</h2>
         <div class="card">
@@ -226,7 +217,6 @@
         </div>
     </div>
 
-    <!-- Section Projets -->
     <div id="projects" class="section">
         <h2><i class="fas fa-code"></i> Projets Phares</h2>
         <div class="card">
@@ -246,46 +236,62 @@
         </div>
     </div>
 
-    <!-- Section Certifications (NOUVEAU) -->
     <div id="certifications" class="section">
         <h2><i class="fas fa-certificate"></i> Licences & Certifications</h2>
+        <p style="font-size: 0.9rem; margin-bottom: 20px; opacity: 0.8;"><em>* Passez la souris sur une certification pour voir le diplôme.</em></p>
         <div class="cert-grid">
+            
             <div class="cert-card">
+                <img src="ibm.jpg" alt="Certificat IBM" class="cert-image">
                 <div class="cert-icon"><i class="fas fa-award"></i></div>
                 <div class="cert-info"><h4>IBM Data Analyst Capstone Project</h4><p>IBM (Nov 2025)</p></div>
             </div>
+
             <div class="cert-card">
-                <div class="cert-icon"><i class="fas fa-award"></i></div>
+                <img src="pwc.png" alt="Certificat PwC" class="cert-image">
+                <div class="cert-icon"><i class="fas fa-chart-pie"></i></div>
                 <div class="cert-info"><h4>Power BI Job Simulation</h4><p>PwC Switzerland - Forage (Mars 2025)</p></div>
             </div>
+
             <div class="cert-card">
+                <img src="hackerRank.png" alt="Certificat HackerRank" class="cert-image">
                 <div class="cert-icon"><i class="fas fa-code"></i></div>
                 <div class="cert-info"><h4>Software Engineer</h4><p>HackerRank (Oct 2024)</p></div>
             </div>
+
             <div class="cert-card">
+                <img src="accenture.png" alt="Certificat Accenture" class="cert-image">
                 <div class="cert-icon"><i class="fas fa-chart-line"></i></div>
                 <div class="cert-info"><h4>Data Analytics and Visualization Job Simulation</h4><p>Accenture North America (Sept 2024)</p></div>
             </div>
+
             <div class="cert-card">
+                <img src="google.png" alt="Certificat Google" class="cert-image">
                 <div class="cert-icon"><i class="fab fa-google"></i></div>
                 <div class="cert-info"><h4>Google AI Essentials</h4><p>Google (Août 2024)</p></div>
             </div>
+
             <div class="cert-card">
+                <img src="honkkong.jpg" alt="Certificat Hong Kong University" class="cert-image">
                 <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
                 <div class="cert-info"><h4>Information Systems Auditing, Controls and Assurance</h4><p>The Hong Kong University of Science and Technology (Août 2024)</p></div>
             </div>
+
             <div class="cert-card">
+                <img src="illinois.jpg" alt="Certificat Illinois" class="cert-image">
                 <div class="cert-icon"><i class="fas fa-search-dollar"></i></div>
                 <div class="cert-info"><h4>Auditing 1: Conceptual Foundations of Auditing</h4><p>University of Illinois Urbana-Champaign (Août 2024)</p></div>
             </div>
+
             <div class="cert-card">
+                <img src="oracle.png" alt="Certificat Oracle" class="cert-image">
                 <div class="cert-icon"><i class="fas fa-cloud"></i></div>
                 <div class="cert-info"><h4>Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate</h4><p>Oracle (Juil 2024)</p></div>
             </div>
+
         </div>
     </div>
 
-    <!-- Section Compétences Techniques -->
     <div class="section">
         <h2><i class="fas fa-laptop-code"></i> Compétences Techniques</h2>
         <div class="card">
@@ -298,7 +304,6 @@
         </div>
     </div>
     
-    <!-- Section Formation (MISE À JOUR) -->
     <div id="education" class="section">
         <h2><i class="fas fa-graduation-cap"></i> Formation</h2>
         <div class="card">
