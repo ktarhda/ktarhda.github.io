@@ -228,7 +228,9 @@
             
             /* Le menu déroulant prend toute la largeur */
             .nav-left { width: 100%; }
-            .nav-links { width: 100%; flex-direction: column; gap: 5px; margin-top: 15px; }
+           /* Le menu est caché par défaut sur mobile, affiché au clic */
+            .nav-links { display: none; width: 100%; flex-direction: column; gap: 5px; margin-top: 15px; }
+            .nav-links.show-mobile { display: flex !important; }
             .nav-links a { text-align: left; padding: 12px; background-color: var(--bg-color); border-radius: 6px; }
             
             /* Les certifications s'affichent sur 1 seule colonne */
@@ -519,7 +521,7 @@
     const navLinks = document.getElementById('navLinks');
 
     gridBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('hide');
+        navLinks.classList.toggle('show-mobile');
     });
 
     // --- 2. Système d'Onglets (Afficher une seule section) ---
@@ -535,7 +537,7 @@
         clickedElement.classList.add('active-link');
 
         if(window.innerWidth < 768) {
-            navLinks.classList.remove('hide');
+            navLinks.classList.remove('show-mobile');
         }
     }
 
