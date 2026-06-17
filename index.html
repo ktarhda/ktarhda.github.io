@@ -4,158 +4,311 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Khalil TARHDA</title>
+    
+    <!-- Polices Google et Icônes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        /* Variables de couleurs - Thème Clair */
         :root {
-            --bg-color: #f4f4f9;
-            --text-color: #333;
-            --container-bg: #fff;
-            --accent-color: #007bff;
-            --border-color: #ddd;
+            --bg-color: #f8fafc;
+            --text-color: #334155;
+            --heading-color: #0f172a;
+            --container-bg: #ffffff;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border-color: #e2e8f0;
+            --tag-bg: #eff6ff;
+            --tag-text: #1e3a8a;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
+
+        /* Variables de couleurs - Thème Sombre */
         [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --container-bg: #1e1e1e;
-            --accent-color: #4da3ff;
-            --border-color: #333;
+            --bg-color: #0f172a;
+            --text-color: #cbd5e1;
+            --heading-color: #f8fafc;
+            --container-bg: #1e293b;
+            --accent-color: #3b82f6;
+            --accent-hover: #60a5fa;
+            --border-color: #334155;
+            --tag-bg: #1e3a8a;
+            --tag-text: #bfdbfe;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
         }
+
+        /* Styles Globaux */
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.7;
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s, color 0.3s;
+            transition: var(--transition);
         }
-        header {
+
+        h1, h2, h3, h4 { color: var(--heading-color); font-weight: 600; }
+
+        /* Barre de Navigation (Nouveau) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
             background-color: var(--container-bg);
-            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            box-sizing: border-box;
+            box-shadow: var(--card-shadow);
+        }
+
+        .nav-brand { font-weight: 700; font-size: 1.2rem; color: var(--accent-color); }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--accent-color); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        /* En-tête (Header) */
+        header {
+            margin-top: 70px;
+            background-color: var(--container-bg);
+            padding: 80px 20px 50px;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
-            position: relative;
         }
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: var(--container-bg);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        header h1 { font-size: 2.8rem; color: var(--accent-color); margin-bottom: 10px; }
+        .subtitle { font-size: 1.15rem; font-weight: 500; color: var(--text-color); margin-bottom: 20px; }
+        
+        .contact-info {
+            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 25px;
         }
-        h1, h2, h3 { color: var(--accent-color); }
+        .contact-info a { color: var(--accent-color); text-decoration: none; }
+        .contact-info a:hover { text-decoration: underline; }
+
+        /* Boutons */
         .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 10px;
-            background-color: var(--accent-color);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
+            display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
+            background-color: var(--accent-color); color: #ffffff !important;
+            text-decoration: none; border-radius: 8px; font-weight: 600;
+            transition: var(--transition);
         }
-        .btn:hover { opacity: 0.9; }
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
+        .btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+
+        /* Conteneur Principal */
+        .container {
+            max-width: 900px; margin: 40px auto; padding: 40px;
+            background-color: var(--container-bg); border-radius: 12px;
+            box-shadow: var(--card-shadow); border: 1px solid var(--border-color);
         }
-        .section { margin-bottom: 30px; }
-        .project-card, .exp-card {
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
+
+        .section { margin-bottom: 50px; padding-top: 60px; margin-top: -60px; }
+        .section h2 { border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 25px; color: var(--accent-color); }
+
+        /* Cartes */
+        .card {
+            border: 1px solid var(--border-color); padding: 25px; border-radius: 8px;
+            margin-bottom: 20px; background-color: var(--bg-color); transition: var(--transition);
         }
-        .tags span {
-            background-color: var(--border-color);
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            margin-right: 5px;
+        .card:hover { transform: translateY(-4px); box-shadow: var(--hover-shadow); border-color: var(--accent-color); }
+        .card h3 { margin-top: 0; margin-bottom: 5px; }
+        .card .meta { font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px; display: flex; justify-content: space-between; }
+        
+        /* Grille des certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
         }
+        .cert-card {
+            border: 1px solid var(--border-color); padding: 20px; border-radius: 8px;
+            background-color: var(--bg-color); display: flex; align-items: flex-start; gap: 15px;
+            transition: var(--transition);
+        }
+        .cert-card:hover { transform: translateY(-3px); box-shadow: var(--hover-shadow); border-color: var(--accent-color); }
+        .cert-icon { font-size: 2rem; color: var(--accent-color); }
+        .cert-info h4 { margin: 0 0 5px 0; font-size: 1rem; }
+        .cert-info p { margin: 0; font-size: 0.85rem; opacity: 0.8; }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .tags span { background-color: var(--tag-bg); color: var(--tag-text); padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 500; }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
     </style>
 </head>
 <body>
 
-<header>
-    <button class="theme-toggle" id="themeToggle">🌓 Mode Sombre</button>
+<!-- Menu de Navigation Fixe -->
+<nav>
+    <div class="nav-brand">K. TARHDA</div>
+    <div class="nav-links">
+        <a href="#about">À propos</a>
+        <a href="#experience">Expérience</a>
+        <a href="#projects">Projets</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#education">Formation</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+</nav>
+
+<header id="accueil">
     <h1>Khalil TARHDA</h1>
-    <p>Ingénieur R&D | Data Science, IA & Perception 3D & computer vision</p>
-    <p>📍 Mobile en France | ✉️ ktarhda@gmail.com | <a href="https://www.linkedin.com/in/khalil-tarhda-854825243/" style="color:var(--accent-color);">LinkedIn</a></p>
-    <a href="cv.pdf" class="btn" download>📄 Télécharger mon CV</a>
+    <p class="subtitle">Ingénieur R&D | Data Science, IA & Perception 3D & Computer Vision</p>
+    
+    <div class="contact-info">
+        <span><i class="fas fa-map-marker-alt"></i> Mobile en France</span>
+        <span><i class="fas fa-envelope"></i> <a href="mailto:ktarhda@gmail.com">ktarhda@gmail.com</a></span>
+        <span><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/khalil-tarhda-854825243/" target="_blank">LinkedIn</a></span>
+    </div>
+
+    <a href="cv.pdf" class="btn" download><i class="fas fa-download"></i> Télécharger mon CV</a>
 </header>
 
 <div class="container">
-    <div class="section">
-        <h2>À propos de moi</h2>
-        <p>Passionné par l'informatique, la technologie et l'intelligence artificielle, je suis diplômé en Sciences Mathématiques et Informatique de l'Université Mohammed V de Rabat. Actuellement, je poursuis un Master M2 en Ingénierie des Systèmes Complexes à l'École d'Ingénieurs du Littoral Côte d'Opale en France.Mon parcours m'a permis de développer une forte capacité à gérer le stresse, à communiquer efficacement et à résoudre des problèmes complexes. J'ai également acquis une vision stratégique, un sens aigu de l'organisation, et je sais m'intégrer et collaborer au sein d'une équipe. Trilingue en arabe, français et anglais, je suis prêt à contribuer à des projets innovants.</p>
+    
+    <!-- Section À Propos -->
+    <div id="about" class="section">
+        <h2><i class="fas fa-user"></i> À propos de moi</h2>
+        <p>Passionné par l'informatique, la technologie et l'intelligence artificielle, je suis diplômé en Sciences Mathématiques et Informatique de l'Université Mohammed V de Rabat. Actuellement, je poursuis un Master M2 en Ingénierie des Systèmes Complexes à l'École d'Ingénieurs du Littoral Côte d'Opale en France. Mon parcours m'a permis de développer une forte capacité à gérer le stresse, à communiquer efficacement et à résoudre des problèmes complexes. J'ai également acquis une vision stratégique, un sens aigu de l'organisation, et je sais m'intégrer et collaborer au sein d'une équipe. Trilingue en arabe, français et anglais, je suis prêt à contribuer à des projets innovants.</p>
     </div>
 
-    <div class="section">
-        <h2>Expérience Professionnelle</h2>
-        <div class="exp-card">
+    <!-- Section Expérience -->
+    <div id="experience" class="section">
+        <h2><i class="fas fa-briefcase"></i> Expérience Professionnelle</h2>
+        <div class="card">
             <h3>Ingénieur R&D (Stagiaire) – Perception 3D & Intelligence Algorithmique</h3>
-            <p><strong>ULCO / LISIC – Calais, France</strong> | <em>Mars 2026 – Septembre 2026</em></p>
+            <div class="meta"><span><strong>ULCO / LISIC</strong> – Calais, France</span><span><em>Mars 2026 – Septembre 2026</em></span></div>
             <ul>
-                <li>Conception d’un pipeline logiciel de perception 3D temps réel (données LiDAR haute résolution).</li>
-                <li>Développement de briques algorithmiques pour le suivi dynamique des trajectoires d’objets.</li>
+                <li>Conception d'un pipeline logiciel de perception 3D temps réel (données LiDAR haute résolution).</li>
+                <li>Développement de briques algorithmiques pour le suivi dynamique des trajectoires d'objets.</li>
+                <li>Mise en œuvre en environnement expérimental avec une logique orientée robustesse et performance.</li>
             </ul>
         </div>
-        <div class="exp-card">
+        <div class="card">
             <h3>Assistant Data Analyst (Stagiaire)</h3>
-            <p><strong>DEVNEST – Rabat, Maroc</strong> | <em>Avril 2024 – Août 2024</em></p>
+            <div class="meta"><span><strong>DEVNEST</strong> – Rabat, Maroc</span><span><em>Avril 2024 – Août 2024</em></span></div>
             <ul>
-                <li>Préparation, structuration et analyse exploratoire de données avec Python.</li>
-                <li>Conception de tableaux de bord interactifs sous Power BI pour le suivi des KPI.</li>
+                <li>Préparation, structuration et analyse exploratoire de données avec Python pour identifier des tendances utiles.</li>
+                <li>Conception de tableaux de bord interactifs sous Power BI pour le suivi des KPI commerciaux et marketing.</li>
             </ul>
         </div>
     </div>
 
-    <div class="section">
-        <h2>Projets Phares</h2>
-        <div class="project-card">
+    <!-- Section Projets -->
+    <div id="projects" class="section">
+        <h2><i class="fas fa-code"></i> Projets Phares</h2>
+        <div class="card">
             <h3>Détection de fissures sur béton par Deep Learning</h3>
-            <p>Conception d’un CNN dédié à la détection de fissures (précision 99,6%). Optimisation par transfer learning avec ResNet50 atteignant 99,85% de précision et un temps d’entraînement divisé par 3.</p>
-            <div class="tags"><span>Python</span><span>Deep Learning</span><span>CNN</span><span>ResNet50</span></div>
+            <p>Conception d'un CNN dédié à la détection de fissures (précision 99,6%). Optimisation par transfer learning avec ResNet50 atteignant 99,85% de précision et un temps d'entraînement divisé par 3.</p>
+            <div class="tags"><span>Python</span><span>Deep Learning</span><span>CNN</span><span>ResNet50</span><span>Computer Vision</span></div>
         </div>
-        <div class="project-card">
-            <h3>Prédiction d’approbation de crédit bancaire</h3>
-            <p>Développement de modèles de classification supervisée (85% accuracy). Nettoyage, encodage et déploiement du modèle via une application web Flask.</p>
+        <div class="card">
+            <h3>Prédiction d'approbation de crédit bancaire</h3>
+            <p>Développement de modèles de classification supervisée (85% accuracy). Nettoyage, encodage et déploiement du modèle via une application web Flask interactive.</p>
             <div class="tags"><span>Machine Learning</span><span>Flask</span><span>Classification</span></div>
         </div>
-        <div class="project-card">
+        <div class="card">
             <h3>Prévision de flux et séries temporelles</h3>
             <p>Collecte automatisée de données financières via API et développement de modèles prédictifs sur l'historique pour analyser la saisonnalité et les tendances.</p>
-            <div class="tags"><span>Time Series</span><span>API</span><span>Python</span></div>
+            <div class="tags"><span>Time Series</span><span>API</span><span>Python</span><span>Data Science</span></div>
         </div>
     </div>
 
+    <!-- Section Certifications (NOUVEAU) -->
+    <div id="certifications" class="section">
+        <h2><i class="fas fa-certificate"></i> Licences & Certifications</h2>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-award"></i></div>
+                <div class="cert-info"><h4>IBM Data Analyst Capstone Project</h4><p>IBM (Nov 2025)</p></div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-award"></i></div>
+                <div class="cert-info"><h4>Power BI Job Simulation</h4><p>PwC Switzerland - Forage (Mars 2025)</p></div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-code"></i></div>
+                <div class="cert-info"><h4>Software Engineer</h4><p>HackerRank (Oct 2024)</p></div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="cert-info"><h4>Data Analytics and Visualization Job Simulation</h4><p>Accenture North America (Sept 2024)</p></div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fab fa-google"></i></div>
+                <div class="cert-info"><h4>Google AI Essentials</h4><p>Google (Août 2024)</p></div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="cert-info"><h4>Information Systems Auditing, Controls and Assurance</h4><p>The Hong Kong University of Science and Technology (Août 2024)</p></div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-search-dollar"></i></div>
+                <div class="cert-info"><h4>Auditing 1: Conceptual Foundations of Auditing</h4><p>University of Illinois Urbana-Champaign (Août 2024)</p></div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-cloud"></i></div>
+                <div class="cert-info"><h4>Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate</h4><p>Oracle (Juil 2024)</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Compétences Techniques -->
     <div class="section">
-        <h2>Compétences Techniques</h2>
-        <ul>
-            <li><strong>Programmation :</strong> Python, SQL, R, Java, C, C++, Matlab</li>
-            <li><strong>Data Science & IA :</strong> Pandas, Scikit-learn, PyTorch, réseaux de neurones, computer vision</li>
-            <li><strong>Bases de données :</strong> MySQL, PostgreSQL, MongoDB, Redis</li>
-            <li><strong>Outils & Visualisation :</strong> Git, Docker, Power BI, Tableau</li>
-        </ul>
+        <h2><i class="fas fa-laptop-code"></i> Compétences Techniques</h2>
+        <div class="card">
+            <ul>
+                <li><strong>Programmation :</strong> Python, SQL, R, Java, C, C++, Matlab</li>
+                <li><strong>Data Science & IA :</strong> Pandas, Scikit-learn, PyTorch, réseaux de neurones, computer vision, perception 3D</li>
+                <li><strong>Bases de données :</strong> MySQL, PostgreSQL, MongoDB, Redis</li>
+                <li><strong>Outils & Visualisation :</strong> Git, Docker, Power BI, Tableau</li>
+            </ul>
+        </div>
     </div>
     
-    <div class="section">
-        <h2>Formation</h2>
-        <ul>
-            <li><strong>Master 2 Ingénierie des Systèmes Complexes</strong> - EILCO, France (2025 - 2026)</li>
-            <li><strong>Master 1 Ingénierie des Systèmes Complexes</strong> - EILCO, France (2024 - 2025)</li>
-            <li><strong>Licence Sciences Mathématiques et Informatique</strong> - Université Mohammed V, Maroc (2023 - 2024)</li>
-        </ul>
+    <!-- Section Formation (MISE À JOUR) -->
+    <div id="education" class="section">
+        <h2><i class="fas fa-graduation-cap"></i> Formation</h2>
+        <div class="card">
+            <ul>
+                <li><strong>Master 2 Ingénierie des Systèmes Complexes</strong> - EILCO, France (2025 - 2026)</li>
+                <li><strong>Master 1 Ingénierie des Systèmes Complexes</strong> - EILCO, France (2024 - 2025)</li>
+                <li><strong>Licence Sciences Mathématiques et Informatique</strong> - Université Mohammed V, Maroc (2023 - 2024)</li>
+                <li><strong>Deug Sciences Mathématiques, Informatique et application</strong> - Université Mohammed V, Maroc (2020 - 2023)</li>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -163,21 +316,24 @@
     const toggleBtn = document.getElementById('themeToggle');
     const htmlTag = document.documentElement;
 
-    // Vérifie le thème sauvegardé
     const savedTheme = localStorage.getItem('theme') || 'light';
     htmlTag.setAttribute('data-theme', savedTheme);
-    updateButtonText(savedTheme);
+    updateButton(savedTheme);
 
     toggleBtn.addEventListener('click', () => {
         const currentTheme = htmlTag.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         htmlTag.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
-        updateButtonText(newTheme);
+        updateButton(newTheme);
     });
 
-    function updateButtonText(theme) {
-        toggleBtn.textContent = theme === 'light' ? '🌓 Mode Sombre' : '☀️ Mode Clair';
+    function updateButton(theme) {
+        if (theme === 'light') {
+            toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        }
     }
 </script>
 </body>
