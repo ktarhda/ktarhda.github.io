@@ -40,81 +40,101 @@
             --tag-bg: #1e3a8a;
             --tag-text: #bfdbfe;
             --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-            --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
         }
 
         /* Styles Globaux */
-        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.7;
-            margin: 0;
-            padding: 0;
+            font-family: 'Inter', sans-serif; background-color: var(--bg-color);
+            color: var(--text-color); line-height: 1.7; margin: 0; padding: 0;
             transition: var(--transition);
         }
 
         h1, h2, h3, h4 { color: var(--heading-color); font-weight: 600; }
 
-        /* Barre de Navigation */
+        /* --- BARRE DE NAVIGATION (NOUVEAU DESIGN) --- */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: var(--container-bg);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            box-sizing: border-box;
-            box-shadow: var(--card-shadow);
+            position: fixed; top: 0; width: 100%; background-color: var(--container-bg);
+            border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex;
+            justify-content: space-between; align-items: center; padding: 15px 40px;
+            box-sizing: border-box; box-shadow: var(--card-shadow);
         }
 
-        .nav-brand { font-weight: 700; font-size: 1.2rem; color: var(--accent-color); }
+        .nav-left { display: flex; align-items: center; gap: 20px; }
+
+        /* Bouton Grille (9 points) */
+        .grid-btn {
+            background: none; border: none; color: var(--text-color);
+            font-size: 1.8rem; cursor: pointer; transition: var(--transition);
+            padding: 0;
+        }
+        .grid-btn:hover { color: var(--accent-color); transform: scale(1.1); }
+
+        /* Liens de navigation (Cachés par défaut) */
+        .nav-links {
+            display: none; /* Caché au démarrage */
+            gap: 15px; flex-wrap: wrap;
+            animation: fadeInMenu 0.3s ease;
+        }
+        .nav-links.show { display: flex; } /* La classe qui fait apparaître le menu */
         
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: var(--transition); }
-        .nav-links a:hover { color: var(--accent-color); }
+        .nav-links a { 
+            text-decoration: none; color: var(--text-color); font-weight: 500; 
+            transition: var(--transition); cursor: pointer;
+            padding: 5px 10px; border-radius: 5px;
+        }
+        .nav-links a:hover, .nav-links a.active-link { 
+            background-color: var(--tag-bg); color: var(--accent-color); 
+        }
+
+        @keyframes fadeInMenu { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
 
         .theme-toggle {
             background: none; border: 1px solid var(--border-color); color: var(--text-color);
             padding: 6px 12px; border-radius: 20px; cursor: pointer; transition: var(--transition);
         }
 
-        /* En-tête (Header) */
+        /* En-tête (Header constant) */
         header {
             margin-top: 70px; background-color: var(--container-bg);
-            padding: 80px 20px 50px; text-align: center; border-bottom: 1px solid var(--border-color);
+            padding: 60px 20px 40px; text-align: center; border-bottom: 1px solid var(--border-color);
         }
-
         header h1 { font-size: 2.8rem; color: var(--accent-color); margin-bottom: 10px; }
-        .subtitle { font-size: 1.15rem; font-weight: 500; color: var(--text-color); margin-bottom: 20px; }
-        
+        .subtitle { font-size: 1.15rem; font-weight: 500; margin-bottom: 20px; }
         .contact-info { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 25px; }
         .contact-info a { color: var(--accent-color); text-decoration: none; }
-        .contact-info a:hover { text-decoration: underline; }
 
         .btn {
             display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
             background-color: var(--accent-color); color: #ffffff !important;
             text-decoration: none; border-radius: 8px; font-weight: 600; transition: var(--transition);
+            border: none; cursor: pointer;
         }
         .btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
 
-        /* Conteneur Principal */
+        /* --- SYSTÈME D'AFFICHAGE UNIQUE (TABS) --- */
         .container {
             max-width: 900px; margin: 40px auto; padding: 40px;
             background-color: var(--container-bg); border-radius: 12px;
             box-shadow: var(--card-shadow); border: 1px solid var(--border-color);
+            min-height: 400px;
         }
 
-        .section { margin-bottom: 50px; padding-top: 60px; margin-top: -60px; }
+        .section { 
+            display: none; /* Toutes les sections sont cachées par défaut */
+            animation: fadeInSection 0.5s ease;
+        }
+        .section.active {
+            display: block; /* Seule la section avec la classe "active" s'affiche */
+        }
+
+        @keyframes fadeInSection {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .section h2 { border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 25px; color: var(--accent-color); }
 
-        /* Cartes (Expériences / Projets) */
+        /* Cartes & Grille */
         .card {
             border: 1px solid var(--border-color); padding: 25px; border-radius: 8px;
             margin-bottom: 20px; background-color: var(--bg-color); transition: var(--transition);
@@ -123,63 +143,50 @@
         .card h3 { margin-top: 0; margin-bottom: 5px; }
         .card .meta { font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px; display: flex; justify-content: space-between; }
         
-        /* Grille des certifications avec effet Hover */
         .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
-        
         .cert-card {
             border: 1px solid var(--border-color); padding: 20px; border-radius: 8px;
             background-color: var(--bg-color); display: flex; align-items: center; gap: 15px;
-            transition: var(--transition);
-            position: relative; /* Essentiel pour l'image au-dessus */
-            overflow: hidden; /* Garde l'image dans les bords ronds */
-            min-height: 100px;
+            transition: var(--transition); cursor: pointer;
         }
-        
         .cert-card:hover { transform: translateY(-3px); box-shadow: var(--hover-shadow); border-color: var(--accent-color); }
         .cert-icon { font-size: 2rem; color: var(--accent-color); }
         .cert-info h4 { margin: 0 0 5px 0; font-size: 1rem; }
         .cert-info p { margin: 0; font-size: 0.85rem; opacity: 0.8; }
 
-        /* Style de l'image cachée */
-        .cert-image {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: contain; /* Ajuste l'image sans la couper */
-            background-color: var(--container-bg);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease; /* Animation d'apparition douce */
-            z-index: 10;
-            padding: 5px;
-            box-sizing: border-box;
-        }
-
-        /* L'image apparaît quand on passe la souris sur la carte */
-        .cert-card:hover .cert-image {
-            opacity: 1;
-            visibility: visible;
-        }
-
         .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
         .tags span { background-color: var(--tag-bg); color: var(--tag-text); padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 500; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
+        ul { padding-left: 20px; } li { margin-bottom: 8px; }
+
+        /* Modal Image */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); }
+        .modal-content { margin: auto; display: block; max-width: 90%; max-height: 90vh; margin-top: 5vh; border-radius: 8px; }
+        .close-modal { position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="nav-links">
-        <a href="#about">À propos</a>
-        <a href="#experience">Expérience</a>
-        <a href="#projects">Projets</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#education">Formation</a>
+    <div class="nav-left">
+        <!-- Le Bouton Grille -->
+        <button id="gridBtn" class="grid-btn"><i class="fas fa-th"></i></button>
+        
+        <!-- Les Liens (Cachés par défaut) -->
+        <div class="nav-links" id="navLinks">
+            <a onclick="showSection('about', this)" class="active-link">À propos</a>
+            <a onclick="showSection('experience', this)">Expérience</a>
+            <a onclick="showSection('projects', this)">Projets</a>
+            <a onclick="showSection('certifications', this)">Certifications</a>
+            <a onclick="showSection('education', this)">Formation</a>
+            <a onclick="showSection('rapports', this)">Rapports</a>
+            <a onclick="showSection('poster', this)">Poster</a>
+            <a onclick="showSection('workshop', this)">Workshop</a>
+        </div>
     </div>
     <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
 </nav>
 
-<header id="accueil">
+<header>
     <h1>Khalil TARHDA</h1>
     <p class="subtitle">Ingénieur R&D | Data Science, IA, Perception 3D & Computer Vision</p>
     <div class="contact-info">
@@ -191,11 +198,14 @@
 </header>
 
 <div class="container">
-    <div id="about" class="section">
+    
+    <!-- 1. À propos (Active par défaut pour ne pas avoir un écran vide) -->
+    <div id="about" class="section active">
         <h2><i class="fas fa-user"></i> À propos de moi</h2>
         <p>Passionné par l'informatique, la technologie et l'intelligence artificielle, je suis diplômé en Sciences Mathématiques et Informatique de l'Université Mohammed V de Rabat. Actuellement, je poursuis un Master M2 en Ingénierie des Systèmes Complexes à l'École d'Ingénieurs du Littoral Côte d'Opale en France. Mon parcours m'a permis de développer une forte capacité à gérer le stresse, à communiquer efficacement et à résoudre des problèmes complexes. J'ai également acquis une vision stratégique, un sens aigu de l'organisation, et je sais m'intégrer et collaborer au sein d'une équipe. Trilingue en arabe, français et anglais, je suis prêt à contribuer à des projets innovants.</p>
     </div>
 
+    <!-- 2. Expérience -->
     <div id="experience" class="section">
         <h2><i class="fas fa-briefcase"></i> Expérience Professionnelle</h2>
         <div class="card">
@@ -204,142 +214,169 @@
             <ul>
                 <li>Conception d'un pipeline logiciel de perception 3D temps réel (données LiDAR haute résolution).</li>
                 <li>Développement de briques algorithmiques pour le suivi dynamique des trajectoires d'objets.</li>
-                <li>Mise en œuvre en environnement expérimental avec une logique orientée robustesse et performance.</li>
             </ul>
         </div>
         <div class="card">
             <h3>Assistant Data Analyst (Stagiaire)</h3>
             <div class="meta"><span><strong>DEVNEST</strong> – Rabat, Maroc</span><span><em>Avril 2024 – Août 2024</em></span></div>
             <ul>
-                <li>Préparation, structuration et analyse exploratoire de données avec Python pour identifier des tendances utiles.</li>
-                <li>Conception de tableaux de bord interactifs sous Power BI pour le suivi des KPI commerciaux et marketing.</li>
+                <li>Préparation, structuration et analyse exploratoire de données avec Python.</li>
+                <li>Conception de tableaux de bord interactifs sous Power BI.</li>
             </ul>
         </div>
     </div>
 
+    <!-- 3. Projets -->
     <div id="projects" class="section">
         <h2><i class="fas fa-code"></i> Projets Phares</h2>
         <div class="card">
             <h3>Détection de fissures sur béton par Deep Learning</h3>
-            <p>Conception d'un CNN dédié à la détection de fissures (précision 99,6%). Optimisation par transfer learning avec ResNet50 atteignant 99,85% de précision et un temps d'entraînement divisé par 3.</p>
-            <div class="tags"><span>Python</span><span>Deep Learning</span><span>CNN</span><span>ResNet50</span><span>Computer Vision</span></div>
+            <p>Conception d'un CNN dédié à la détection de fissures (précision 99,6%).</p>
+            <div class="tags"><span>Python</span><span>Deep Learning</span><span>CNN</span></div>
         </div>
         <div class="card">
             <h3>Prédiction d'approbation de crédit bancaire</h3>
-            <p>Développement de modèles de classification supervisée (85% accuracy). Nettoyage, encodage et déploiement du modèle via une application web Flask interactive.</p>
-            <div class="tags"><span>Machine Learning</span><span>Flask</span><span>Classification</span></div>
-        </div>
-        <div class="card">
-            <h3>Prévision de flux et séries temporelles</h3>
-            <p>Collecte automatisée de données financières via API et développement de modèles prédictifs sur l'historique pour analyser la saisonnalité et les tendances.</p>
-            <div class="tags"><span>Time Series</span><span>API</span><span>Python</span><span>Data Science</span></div>
+            <p>Développement de modèles de classification supervisée (85% accuracy).</p>
+            <div class="tags"><span>Machine Learning</span><span>Flask</span></div>
         </div>
     </div>
 
+    <!-- 4. Certifications -->
     <div id="certifications" class="section">
         <h2><i class="fas fa-certificate"></i> Licences & Certifications</h2>
-        <p style="font-size: 0.9rem; margin-bottom: 20px; opacity: 0.8;"><em>* Passez la souris sur une certification pour voir le diplôme.</em></p>
         <div class="cert-grid">
-            
-            <div class="cert-card">
-                <img src="ibm.png" alt="Certificat IBM" class="cert-image">
+            <div class="cert-card" onclick="openModal('ibm.png')">
                 <div class="cert-icon"><i class="fas fa-award"></i></div>
-                <div class="cert-info"><h4>IBM Data Analyst Capstone Project</h4><p>IBM (Nov 2025)</p></div>
+                <div class="cert-info"><h4>IBM Data Analyst Capstone Project</h4><p>IBM</p></div>
             </div>
-
-            <div class="cert-card">
-                <img src="pwc.png" alt="Certificat PwC" class="cert-image">
+            <div class="cert-card" onclick="openModal('pwc.png')">
                 <div class="cert-icon"><i class="fas fa-chart-pie"></i></div>
-                <div class="cert-info"><h4>Power BI Job Simulation</h4><p>PwC Switzerland - Forage (Mars 2025)</p></div>
+                <div class="cert-info"><h4>Power BI Job Simulation</h4><p>PwC Switzerland</p></div>
             </div>
-
-            <div class="cert-card">
-                <img src="hackerRank.png" alt="Certificat HackerRank" class="cert-image">
+            <div class="cert-card" onclick="openModal('hackerRank.png')">
                 <div class="cert-icon"><i class="fas fa-code"></i></div>
-                <div class="cert-info"><h4>Software Engineer</h4><p>HackerRank (Oct 2024)</p></div>
+                <div class="cert-info"><h4>Software Engineer</h4><p>HackerRank</p></div>
             </div>
-
-            <div class="cert-card">
-                <img src="accenture.png" alt="Certificat Accenture" class="cert-image">
-                <div class="cert-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="cert-info"><h4>Data Analytics and Visualization Job Simulation</h4><p>Accenture North America (Sept 2024)</p></div>
-            </div>
-
-            <div class="cert-card">
-                <img src="google.png" alt="Certificat Google" class="cert-image">
+            <div class="cert-card" onclick="openModal('google.png')">
                 <div class="cert-icon"><i class="fab fa-google"></i></div>
-                <div class="cert-info"><h4>Google AI Essentials</h4><p>Google (Août 2024)</p></div>
+                <div class="cert-info"><h4>Google AI Essentials</h4><p>Google</p></div>
             </div>
-
-            <div class="cert-card">
-                <img src="honkkong.png" alt="Certificat Hong Kong University" class="cert-image">
-                <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
-                <div class="cert-info"><h4>Information Systems Auditing, Controls and Assurance</h4><p>The Hong Kong University of Science and Technology (Août 2024)</p></div>
-            </div>
-
-            <div class="cert-card">
-                <img src="illinois.png" alt="Certificat Illinois" class="cert-image">
-                <div class="cert-icon"><i class="fas fa-search-dollar"></i></div>
-                <div class="cert-info"><h4>Auditing 1: Conceptual Foundations of Auditing</h4><p>University of Illinois Urbana-Champaign (Août 2024)</p></div>
-            </div>
-
-            <div class="cert-card">
-                <img src="oracle.png" alt="Certificat Oracle" class="cert-image">
-                <div class="cert-icon"><i class="fas fa-cloud"></i></div>
-                <div class="cert-info"><h4>Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate</h4><p>Oracle (Juil 2024)</p></div>
-            </div>
-
         </div>
     </div>
 
-    <div class="section">
-        <h2><i class="fas fa-laptop-code"></i> Compétences Techniques</h2>
-        <div class="card">
-            <ul>
-                <li><strong>Programmation :</strong> Python, SQL, R, Java, C, C++, Matlab</li>
-                <li><strong>Data Science & IA :</strong> Pandas, Scikit-learn, PyTorch, réseaux de neurones, computer vision, perception 3D</li>
-                <li><strong>Bases de données :</strong> MySQL, PostgreSQL, MongoDB, Redis</li>
-                <li><strong>Outils & Visualisation :</strong> Git, Docker, Power BI, Tableau</li>
-            </ul>
-        </div>
-    </div>
-    
+    <!-- 5. Formation & Compétences -->
     <div id="education" class="section">
-        <h2><i class="fas fa-graduation-cap"></i> Formation</h2>
+        <h2><i class="fas fa-laptop-code"></i> Compétences & Formation</h2>
         <div class="card">
+            <h3>Compétences Techniques</h3>
             <ul>
-                <li><strong>Master 2 Ingénierie des Systèmes Complexes</strong> - EILCO, France (2025 - 2026)</li>
-                <li><strong>Master 1 Ingénierie des Systèmes Complexes</strong> - EILCO, France (2024 - 2025)</li>
-                <li><strong>Licence Sciences Mathématiques et Informatique</strong> - Université Mohammed V, Maroc (2023 - 2024)</li>
-                <li><strong>Deug Sciences Mathématiques, Informatique et application</strong> - Université Mohammed V, Maroc (2020 - 2023)</li>
+                <li><strong>Data Science & IA :</strong> Pandas, Scikit-learn, PyTorch, computer vision, perception 3D</li>
+                <li><strong>Outils :</strong> Git, Docker, Power BI, Tableau</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Formation</h3>
+            <ul>
+                <li><strong>Master 2 Ingénierie des Systèmes Complexes</strong> - EILCO (2025 - 2026)</li>
+                <li><strong>Master 1 Ingénierie des Systèmes Complexes</strong> - EILCO (2024 - 2025)</li>
             </ul>
         </div>
     </div>
+
+    <!-- 6. Rapports (NOUVEAU) -->
+    <div id="rapports" class="section">
+        <h2><i class="fas fa-file-alt"></i> Mes Rapports</h2>
+        <div class="card">
+            <h3>Rapport d'activité - Perception 3D</h3>
+            <p>Document détaillant mes travaux de recherche sur le pipeline logiciel LiDAR.</p>
+            <!-- Remplacez "rapport.pdf" par le vrai nom de votre fichier PDF -->
+            <a href="rapport.pdf" class="btn" target="_blank"><i class="fas fa-eye"></i> Visualiser le Rapport</a>
+        </div>
+    </div>
+
+    <!-- 7. Poster (NOUVEAU) -->
+    <div id="poster" class="section">
+        <h2><i class="fas fa-image"></i> Poster Scientifique</h2>
+        <div class="card">
+            <h3>Présentation Visuelle des Travaux</h3>
+            <p>Poster récapitulatif présenté lors de la soutenance de recherche.</p>
+            <!-- Remplacez "poster.pdf" par le vrai nom de votre fichier PDF -->
+            <a href="poster.pdf" class="btn" target="_blank"><i class="fas fa-eye"></i> Visualiser le Poster</a>
+        </div>
+    </div>
+
+    <!-- 8. Workshop (NOUVEAU) -->
+    <div id="workshop" class="section">
+        <h2><i class="fas fa-chalkboard-teacher"></i> Workshop</h2>
+        <div class="card">
+            <h3>Atelier Pratique : Intelligence Algorithmique</h3>
+            <p>Support de présentation utilisé lors du Workshop sur les systèmes intelligents.</p>
+            <!-- Remplacez "workshop.pdf" par le vrai nom de votre fichier PDF -->
+            <a href="workshop.pdf" class="btn" target="_blank"><i class="fas fa-eye"></i> Visualiser le Support</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal Image -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImage">
 </div>
 
 <script>
+    // --- 1. Gestion du Bouton Grille (Menu Toggle) ---
+    const gridBtn = document.getElementById('gridBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    gridBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+    });
+
+    // --- 2. Système d'Onglets (Afficher une seule section) ---
+    function showSection(sectionId, clickedElement) {
+        // Cacher toutes les sections
+        document.querySelectorAll('.section').forEach(sec => {
+            sec.classList.remove('active');
+        });
+        
+        // Retirer la couleur bleue de tous les liens
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active-link');
+        });
+
+        // Afficher la section demandée
+        document.getElementById(sectionId).classList.add('active');
+        
+        // Mettre en bleu le lien cliqué
+        clickedElement.classList.add('active-link');
+
+        // Optionnel : refermer le menu sur mobile après un clic
+        if(window.innerWidth < 768) {
+            navLinks.classList.remove('show');
+        }
+    }
+
+    // --- 3. Modal et Thème ---
+    function openModal(imageSrc) {
+        document.getElementById("imageModal").style.display = "block";
+        document.getElementById("modalImage").src = imageSrc;
+    }
+    function closeModal() { document.getElementById("imageModal").style.display = "none"; }
+
     const toggleBtn = document.getElementById('themeToggle');
     const htmlTag = document.documentElement;
-
     const savedTheme = localStorage.getItem('theme') || 'light';
     htmlTag.setAttribute('data-theme', savedTheme);
     updateButton(savedTheme);
 
     toggleBtn.addEventListener('click', () => {
-        const currentTheme = htmlTag.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        const newTheme = htmlTag.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
         htmlTag.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateButton(newTheme);
     });
-
-    function updateButton(theme) {
-        if (theme === 'light') {
-            toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-        } else {
-            toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-        }
-    }
+    function updateButton(theme) { toggleBtn.innerHTML = theme === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>'; }
 </script>
 </body>
 </html>
