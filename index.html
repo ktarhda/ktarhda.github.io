@@ -92,15 +92,48 @@
             padding: 6px 12px; border-radius: 20px; cursor: pointer; transition: var(--transition);
         }
 
-        /* En-tête (Header constant) */
+      /* En-tête (Header constant) */
         header {
             margin-top: 70px; background-color: var(--container-bg);
-            padding: 60px 20px 40px; text-align: center; border-bottom: 1px solid var(--border-color);
+            padding: 80px 20px 50px; text-align: center; border-bottom: 1px solid var(--border-color);
         }
-        header h1 { font-size: 2.8rem; color: var(--accent-color); margin-bottom: 10px; }
-        .subtitle { font-size: 1.15rem; font-weight: 500; margin-bottom: 20px; }
-        .contact-info { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 25px; }
-        .contact-info a { color: var(--accent-color); text-decoration: none; }
+        
+        header h1 { 
+            font-size: 3.2rem; 
+            color: var(--heading-color); /* Nom en sombre pour un look plus premium */
+            margin-bottom: 8px; 
+            letter-spacing: -1px; 
+            font-weight: 700;
+        }
+        
+        .subtitle { 
+            font-size: 1.15rem; 
+            font-weight: 600; 
+            color: var(--accent-color); /* L'expertise en bleu pour attirer l'oeil */
+            margin-bottom: 25px; 
+        }
+        
+        /* Transformation des contacts en badges modernes */
+        .contact-info { 
+            display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; 
+        }
+        
+        .contact-info span {
+            background-color: var(--bg-color);
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .contact-info i { color: var(--accent-color); } /* Icônes en bleu */
+        .contact-info a { color: var(--text-color); text-decoration: none; transition: var(--transition); }
+        .contact-info a:hover { color: var(--accent-color); }
 
         .btn {
             display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
@@ -108,8 +141,7 @@
             text-decoration: none; border-radius: 8px; font-weight: 600; transition: var(--transition);
             border: none; cursor: pointer;
         }
-        .btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
-
+        .btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: var(--hover-shadow); }
         /* --- SYSTÈME D'AFFICHAGE UNIQUE (TABS) --- */
         .container {
             max-width: 900px; margin: 40px auto; padding: 40px;
@@ -167,7 +199,7 @@
 
 <nav>
     <div class="nav-left">
-        <button id="gridBtn" class="grid-btn"><i class="fas fa-th"></i></button>
+   <button id="gridBtn" class="grid-btn"><i class="fas fa-bars"></i></button>
         
         <div class="nav-links" id="navLinks">
             <a onclick="showSection('about', this)" class="active-link">À propos</a>
@@ -180,7 +212,10 @@
             <a onclick="showSection('workshop', this)">Workshop</a>
         </div>
     </div>
-    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <a href="cv.pdf" class="btn" download><i class="fas fa-download"></i> Télécharger mon CV</a>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+    </div>
 </nav>
 
 <header>
@@ -191,7 +226,7 @@
         <span><i class="fas fa-envelope"></i> <a href="mailto:ktarhda@gmail.com">ktarhda@gmail.com</a></span>
         <span><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/khalil-tarhda-854825243/" target="_blank">LinkedIn</a></span>
     </div>
-    <a href="cv.pdf" class="btn" download><i class="fas fa-download"></i> Télécharger mon CV</a>
+    
 </header>
 
 <div class="container">
@@ -282,7 +317,7 @@
     <div id="education" class="section">
         <h2><i class="fas fa-graduation-cap"></i> Formation & Compétences</h2>
         <div class="card">
-            <h3><i class="fas fa-university"></i> Parcours Universitaire</h3>
+            <h3><i class="fas fa-university"></i> Parcours Universitaire & Scolaire </h3>
             <ul>
                 <li><strong>Master 2 Ingénierie des Systèmes Complexes</strong> - Ecole d'Ingénieurs du Litorale Côte d'Opale, France (2025 - 2026)</li>
                 <li><strong>Master 1 Ingénierie des Systèmes Complexes</strong> - Ecole d'Ingénieurs du Litorale Côte d'Opale, France (2024 - 2025)</li>
@@ -310,7 +345,7 @@
         <div class="card">
             <h3>Rapport de Projet - Détection de Fissures</h3>
             <p>Rapport complet sur la conception d'un CNN et l'optimisation via ResNet50.</p>
-            <a href="rapport.pdf" class="btn" target="_blank"><i class="fas fa-eye"></i> Visualiser le Rapport</a>
+            <a href="raport_cnn.pdf" class="btn" target="_blank"><i class="fas fa-eye"></i> Visualiser le Rapport</a>
         </div>
     </div>
 
@@ -318,7 +353,7 @@
         <h2><i class="fas fa-image"></i> Poster Scientifique</h2>
         <div class="card">
             <h3>Présentation Visuelle des Travaux</h3>
-            <p>Poster récapitulatif présenté lors de la soutenance de recherche.</p>
+            <p>Poster récapitulatif présenté lors d'une journée de recherche.</p>
             <a href="poster.pdf" class="btn" target="_blank"><i class="fas fa-eye"></i> Visualiser le Poster</a>
         </div>
     </div>
@@ -326,9 +361,9 @@
     <div id="workshop" class="section">
         <h2><i class="fas fa-chalkboard-teacher"></i> Workshop</h2>
         <div class="card">
-            <h3>Atelier Pratique : Intelligence Algorithmique</h3>
-            <p>Support de présentation utilisé lors du Workshop sur les systèmes intelligents.</p>
-            <a href="workshop.pdf" class="btn" target="_blank"><i class="fas fa-eye"></i> Visualiser le Support</a>
+            <h3>Uncertainty Quantification of Spherical Measurements in 3D LiDAR</h3>
+            <p>Présentation d'une approche de modélisation par "boîtes d'inclusion sphériques" pour compenser les erreurs de quantification et améliorer la fiabilité de la perception LiDAR 3D.</p>
+            <a href="raport_worshop.pdf" class="btn" target="_blank"><i class="fas fa-eye"></i> Visualiser le Support</a>
         </div>
     </div>
 
