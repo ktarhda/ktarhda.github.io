@@ -60,26 +60,31 @@
 
         .nav-left { display: flex; align-items: center; gap: 20px; }
 
-        /* Bouton Grille (9 points) */
+        /* Bouton Menu Hamburger (Toujours visible pour pouvoir fermer/ouvrir) */
         .grid-btn {
             background: none; border: none; color: var(--text-color);
             font-size: 1.8rem; cursor: pointer; transition: var(--transition);
             padding: 0;
+            display: block;
         }
         .grid-btn:hover { color: var(--accent-color); transform: scale(1.1); }
 
-      /* Liens de navigation (Visibles par défaut) */
+        /* Liens de navigation (Visibles par défaut sur PC) */
         .nav-links {
-            display: flex; /* <-- On force l'affichage par défaut ici */
+            display: flex;
             gap: 15px; 
             flex-wrap: wrap;
             transition: all 0.3s ease;
         }
-        .nav-links.hide { 
+        
+        /* Classe spéciale pour cacher le menu sur PC quand on clique */
+        .nav-links.hide-pc { 
             display: none !important; 
-        } /* <-- Nouvelle classe que le bouton va utiliser pour cacher */
+        } 
+        
         /* Gestion du bouton CV */
-        .cv-text-mobile { display: none; } /* On cache le petit texte "CV" sur ordinateur */
+        .cv-text-mobile { display: none; }
+
         .nav-links a { 
             text-decoration: none; color: var(--text-color); font-weight: 500; 
             transition: var(--transition); cursor: pointer;
@@ -96,11 +101,11 @@
             padding: 6px 12px; border-radius: 20px; cursor: pointer; transition: var(--transition);
         }
 
-     /* En-tête (Header constant) */
+        /* En-tête (Header constant) */
         header {
-            margin-top: 70px; /* On garde ça pour ne pas passer sous la barre de navigation */
+            margin-top: 70px;
             background-color: var(--container-bg);
-            padding: 30px 20px 15px; /* C'est ici qu'on réduit fortement l'espace en haut et en bas */
+            padding: 30px 20px 15px; 
             text-align: center; 
             border-bottom: 1px solid var(--border-color);
         }
@@ -108,7 +113,7 @@
         header h1 { 
             font-size: 3.2rem; 
             color: var(--heading-color); 
-            margin-bottom: 5px; /* Espace sous le nom réduit */
+            margin-bottom: 5px; 
             letter-spacing: -1px; 
             font-weight: 700;
         }
@@ -117,14 +122,9 @@
             font-size: 1.15rem; 
             font-weight: 600; 
             color: var(--accent-color); 
-            margin-bottom: 15px; /* Espace sous le titre réduit */
+            margin-bottom: 15px; 
         }
         
-        /* Transformation des contacts en badges modernes */
-        .contact-info { 
-            display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; 
-            margin-bottom: 5px; /* Espace sous les badges de contact fortement réduit */
-        }
         /* Transformation des contacts en badges modernes */
         .contact-info { 
             display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; 
@@ -143,7 +143,7 @@
             box-shadow: var(--card-shadow);
         }
         
-        .contact-info i { color: var(--accent-color); } /* Icônes en bleu */
+        .contact-info i { color: var(--accent-color); }
         .contact-info a { color: var(--text-color); text-decoration: none; transition: var(--transition); }
         .contact-info a:hover { color: var(--accent-color); }
 
@@ -154,6 +154,7 @@
             border: none; cursor: pointer;
         }
         .btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: var(--hover-shadow); }
+
         /* --- SYSTÈME D'AFFICHAGE UNIQUE (TABS) --- */
         .container {
             max-width: 900px; margin: 40px auto; padding: 40px;
@@ -163,11 +164,11 @@
         }
 
         .section { 
-            display: none; /* Toutes les sections sont cachées par défaut */
+            display: none; 
             animation: fadeInSection 0.5s ease;
         }
         .section.active {
-            display: block; /* Seule la section avec la classe "active" s'affiche */
+            display: block; 
         }
 
         @keyframes fadeInSection {
@@ -206,44 +207,34 @@
         .modal-content { margin: auto; display: block; max-width: 90%; max-height: 90vh; margin-top: 5vh; border-radius: 8px; }
         .close-modal { position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; cursor: pointer; }
 
-/* --- ADAPTATION POUR LES TÉLÉPHONES (RESPONSIVE) --- */
+        /* --- ADAPTATION POUR LES TÉLÉPHONES (RESPONSIVE) --- */
         @media (max-width: 768px) {
-            /* Réduction des textes de l'en-tête */
             header { padding: 100px 15px 30px; }
             header h1 { font-size: 2.2rem; }
             .subtitle { font-size: 1rem; line-height: 1.5; }
-            /* Raccourcir le bouton CV sur mobile */
+            
             .cv-text-desktop { display: none; }
             .cv-text-mobile { display: inline; }
-            /* Le bloc principal prend tout l'écran */
+            
             .container { margin: 15px; padding: 20px; }
             .section h2 { font-size: 1.3rem; }
             
-            /* Adaptation de la barre de navigation (Menu mobile) */
             nav { padding: 15px; align-items: flex-start; flex-direction: column; }
-            
-            /* Bouton CV et Mode Sombre déplacés en haut à droite */
             nav > div:last-child { position: absolute; top: 12px; right: 15px; gap: 10px; }
             nav .btn { font-size: 0.75rem; padding: 8px 10px; }
             
-            /* Le menu déroulant prend toute la largeur */
             .nav-left { width: 100%; }
-           /* Le menu est caché par défaut sur mobile, affiché au clic */
+            
+            /* Le menu est caché par défaut sur mobile, affiché au clic */
             .nav-links { display: none; width: 100%; flex-direction: column; gap: 5px; margin-top: 15px; }
             .nav-links.show-mobile { display: flex !important; }
             .nav-links a { text-align: left; padding: 12px; background-color: var(--bg-color); border-radius: 6px; }
             
-            /* Les certifications s'affichent sur 1 seule colonne */
             .cert-grid { grid-template-columns: 1fr; }
-            
-            /* Les boutons de contact s'empilent proprement */
             .contact-info { flex-direction: column; }
             .contact-info span { justify-content: center; }
-            
-            /* Adaptation de la taille de l'image du diplôme */
             .modal-content { max-width: 95%; margin-top: 15vh; }
         }
-
     </style>
 </head>
 <body>
