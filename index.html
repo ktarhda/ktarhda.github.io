@@ -92,16 +92,19 @@
             padding: 6px 12px; border-radius: 20px; cursor: pointer; transition: var(--transition);
         }
 
-      /* En-tête (Header constant) */
+     /* En-tête (Header constant) */
         header {
-            margin-top: 70px; background-color: var(--container-bg);
-            padding: 80px 20px 50px; text-align: center; border-bottom: 1px solid var(--border-color);
+            margin-top: 70px; /* On garde ça pour ne pas passer sous la barre de navigation */
+            background-color: var(--container-bg);
+            padding: 30px 20px 15px; /* C'est ici qu'on réduit fortement l'espace en haut et en bas */
+            text-align: center; 
+            border-bottom: 1px solid var(--border-color);
         }
         
         header h1 { 
             font-size: 3.2rem; 
-            color: var(--heading-color); /* Nom en sombre pour un look plus premium */
-            margin-bottom: 8px; 
+            color: var(--heading-color); 
+            margin-bottom: 5px; /* Espace sous le nom réduit */
             letter-spacing: -1px; 
             font-weight: 700;
         }
@@ -109,10 +112,15 @@
         .subtitle { 
             font-size: 1.15rem; 
             font-weight: 600; 
-            color: var(--accent-color); /* L'expertise en bleu pour attirer l'oeil */
-            margin-bottom: 25px; 
+            color: var(--accent-color); 
+            margin-bottom: 15px; /* Espace sous le titre réduit */
         }
         
+        /* Transformation des contacts en badges modernes */
+        .contact-info { 
+            display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; 
+            margin-bottom: 5px; /* Espace sous les badges de contact fortement réduit */
+        }
         /* Transformation des contacts en badges modernes */
         .contact-info { 
             display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; 
@@ -244,7 +252,7 @@
             <a onclick="showSection('education', this)">Formation</a>
             <a onclick="showSection('rapports', this)">Rapports</a>
             <a onclick="showSection('poster', this)">Poster</a>
-            <a onclick="showSection('workshop', this)">Workshop</a>
+            
         </div>
     </div>
     <div style="display: flex; align-items: center; gap: 15px;">
