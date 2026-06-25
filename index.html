@@ -512,7 +512,14 @@
     const navLinks = document.getElementById('navLinks');
 
     gridBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('show-mobile');
+        // On vérifie la largeur actuelle de l'écran pour savoir quelle logique appliquer
+        if (window.innerWidth >= 768) {
+            // Logique pour PC : la base est flex, on utilise 'hide-pc' pour cacher/montrer
+            navLinks.classList.toggle('hide-pc');
+        } else {
+            // Logique pour Mobile : la base est none, on utilise 'show-mobile' pour montrer/cacher
+            navLinks.classList.toggle('show-mobile');
+        }
     });
 
     // --- 2. Système d'Onglets (Afficher une seule section) ---
