@@ -278,22 +278,27 @@
     
    <div id="about" class="section active">
         <h2><i class="fas fa-user"></i> À propos de moi</h2>
-        <p>Passionné par l'informatique, la data et l'Intelligence Artificielle, je suis actuellement en dernière année de Master (M2) en Ingénierie des Systèmes Complexes à l'École d'Ingénieurs du Littoral Côte d'Opale (EILCO) en France. Mon parcours m'a permis de développer une forte capacité d'adaptation, à gérer la pression et à résoudre des problèmes techniques complexes. J'ai également acquis une vision stratégique, un sens aigu de l'organisation, et j'apprécie particulièrement collaborer au sein d'équipes pluridisciplinaires. Trilingue (arabe, français, anglais) et toujours prêt à relever de nouveaux défis innovants, je bâtis mon expertise d'ingénierie actuelle sur de solides fondations acquises lors de ma Licence en Sciences Mathématiques et Informatique à l'Université Mohammed V de Rabat, Maroc.</p>
-    </div>
-
+                <p>Diplômé d'un Master en Ingénierie des Systèmes Complexes à l'École d'Ingénieurs du Littoral Côte d'Opale, promotion 2026, je me spécialise en vision par ordinateur et en perception 3D. Lors de mon stage de fin d'études au laboratoire LISIC, j'ai conçu une chaîne complète de détection et de suivi multi-objets à partir d'un LiDAR 3D, validée sur des données réelles. Mes projets couvrent aussi le deep learning appliqué à l'image (CNN, ResNet50, YOLOv8) et l'analyse de données. Je recherche un CDI en vision par ordinateur et en intelligence artificielle. Trilingue (arabe, français, anglais), j'apprécie travailler en équipe pluridisciplinaire, et je m'appuie sur une Licence en Sciences Mathématiques et Informatique de l'Université Mohammed V de Rabat.</p>
+   </div>
     <div id="experience" class="section">
         <h2><i class="fas fa-briefcase"></i> Expérience Professionnelle</h2>
         
-        <div class="card">
-            <h3>Ingénieur R&D (Stagiaire) – Perception 3D & Intelligence Algorithmique</h3>
-            <div class="meta"><span><strong>ULCO / LISIC</strong> – Calais, France</span><span><em>Mars 2026 – Octobre 2026 (en cours)</em></span></div>
+                <div class="card">
+            <h3>Ingénieur R&amp;D (Stage de fin d'études) – Perception 3D LiDAR &amp; Suivi multi-objets</h3>
+            <div class="meta"><span><strong>Laboratoire LISIC – ULCO</strong> – Calais, France</span><span><em>Mars 2026 – Septembre 2026</em></span></div>
             <ul>
-                <li>Conception et développement d’un pipeline logiciel de perception 3D temps réel à partir de données LiDAR haute résolution.</li>
-                <li>Analyse de l’environnement spatial pour la détection précise d’objets en contexte autonome.</li>
-                <li>Développement de briques algorithmiques pour le suivi dynamique des trajectoires d’objets (tracking).</li>
-                <li>Contribution à des problématiques de recherche appliquée en perception intelligente, fusion de données 3D et traitement algorithmique temps réel.</li>
-                <li>Mise en œuvre en environnement expérimental, avec une logique orientée robustesse, performance et autonomie.</li>
+                <li>Développement complet d'un pipeline de détection et de suivi d'objets flottants à partir d'un LiDAR 3D Ouster OS1-128 (128 faisceaux, 10 Hz) et de sa centrale inertielle.</li>
+                <li>Correction d'inclinaison du nuage de points à chaque trame grâce à l'IMU (roll et pitch), et extraction d'une région d'intérêt pour réduire le volume de données.</li>
+                <li>Segmentation de la matrice de profondeur (128 × 512) par seuil adaptatif, puis traitement d'image (fermeture morphologique, étiquetage en composantes connexes) et extraction de boîtes englobantes 3D.</li>
+                <li>Implémentation et comparaison de quatre filtres de suivi multi-objets : Kalman, filtre particulaire, Kalman par intervalles (UBIKF) et Box Particle Filter, avec association par distance de Mahalanobis.</li>
+                <li>Validation sur données réelles acquises sur le canal de Calais : 3 objets suivis simultanément, jusqu'à 98 % des trames avec le bon nombre d'objets, vitesses de dérive cohérentes avec la mesure terrain.</li>
             </ul>
+            <div class="tags">
+                <span>MATLAB</span><span>LiDAR 3D</span><span>Nuages de points</span><span>Fusion LiDAR / IMU</span><span>Filtre de Kalman</span><span>Filtre particulaire</span><span>Suivi multi-objets</span>
+            </div>
+            <div style="margin-top: 20px;">
+                <a href="https://github.com/ktarhda/Detection-and-Tracking-of-Floating-Marine-Debris-Using-a-3D-LiDAR" class="btn" style="background-color: #24292e;" target="_blank"><i class="fab fa-github"></i> Code source</a>
+            </div>
         </div>
         
         <div class="card">
@@ -494,6 +499,11 @@
 
     <div id="rapports" class="section">
         <h2><i class="fas fa-file-alt"></i> Mes Rapports et Poster scientifiques</h2>
+                <div class="card">
+            <h3>Rapport de fin d'études – Détection et suivi de déchets flottants par LiDAR 3D</h3>
+            <p>Conception d'une chaîne de perception LiDAR (correction IMU, segmentation, boîtes englobantes) et comparaison de quatre filtres de suivi multi-objets, probabilistes et par intervalles, sur des données réelles acquises sur le canal de Calais.</p>
+            <a href="Rapport de Stage (PFE).pdf" class="btn" target="_blank"><i class="fas fa-eye"></i> Visualiser le Rapport</a>
+        </div>
         <div class="card">
             <h3>Rapport de Projet - Détection de Fissures</h3>
             <p>Rapport complet sur la conception d'un CNN et l'optimisation via ResNet50.</p>
